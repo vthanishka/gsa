@@ -1,86 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Open Link in Background</title>
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; padding: 30px; }
-    button {
-      padding: 12px 18px;
-      margin: 8px;
-      font-size: 16px;
-      border-radius: 6px;
-      border: none;
-      cursor: pointer;
-      background: #1f8ef1;
-      color: #fff;
-    }
-    button:active { transform: translateY(1px); }
-    #msg { margin-top: 16px; color: #d00; }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSA Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h2>Open link in background (click any button)</h2>
-  <p>Click a button — that link will open in a new tab. The current page will try to stay focused.</p>
+    <canvas id="particle-canvas"></canvas>
 
-  <div id="buttons">
-    <button data-url="https://aiskillshouse.com/student/qr-mediator.html?uid=4222&promptId=16&pli=1">Open Link 1</button>
-    <button data-url="https://aiskillshouse.com/student/qr-mediator.html?uid=4222&promptId=15&pli=1">Open Link 2</button>
-    <button data-url="https://aiskillshouse.com/student/qr-mediator.html?uid=4222&promptId=14&pli=1">Open Link 3</button>
-    <button data-url="https://aiskillshouse.com/student/qr-mediator.html?uid=4222&promptId=13&pli=1">Open Link 4</button>
-    <button data-url="https://aiskillshouse.com/student/qr-mediator.html?uid=4222&promptId=6&pli=1">Open Link 5</button>
-  </div>
+    <div id="splash-screen">
+        <div id="splash-logo"></div>
+    </div>
 
-  <div id="msg"></div>
+    <div id="main-content" style="display:none;">
+        <header id="hero-section">
+            <div id="hero-logo-watermark"></div>
+            <h1 id="hero-title">Google Student Gemini Ambassador</h1>
+        </header>
 
-  <script>
-    // Replace the data-url values above with your real Gemini links.
-    // Function to open a URL in a new tab while trying to keep current page focused.
-    function openInBackground(url) {
-      // Best-effort method: create an <a> and programmatically click it (counts as user gesture)
-      const a = document.createElement('a');
-      a.href = url;
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      // Append to DOM so click event works reliably in some browsers
-      a.style.display = 'none';
-      document.body.appendChild(a);
+        <section id="game-section">
+            <div class="game-content">
+                <h2 class="section-title">Cosmic Collector</h2>
+                <p>Collect the stars and avoid the obstacles in this space adventure!</p>
+                <p class="gemini-note">This game is fully developed using Google Gemini technology.</p>
+                <button id="launch-game-btn" class="magnetic">Play Now</button>
+            </div>
+        </section>
 
-      // Try to open
-      try {
-        a.click(); // this usually opens a new tab and preserves current focus depending on browser settings
-        document.body.removeChild(a);
+        <section id="links-section">
+            <h2 class="section-title">Quick Links</h2>
+            <div class="links-container">
+                <!-- Replace the "#" with your actual URLs -->
+                <a href="https://aiskillshouse.com/student/qr-mediator.html?uid=4222&promptId=16" class="portal-card magnetic link-card"><h3>Link 1</h3></a>
+                <a href="https://aiskillshouse.com/student/qr-mediator.html?uid=4222&promptId=16" class="portal-card magnetic link-card"><h3>Link 2</h3></a>
+                <a href="https://aiskillshouse.com/student/qr-mediator.html?uid=4222&promptId=16" class="portal-card magnetic link-card"><h3>Link 3</h3></a>
+                <a href="https://aiskillshouse.com/student/qr-mediator.html?uid=4222&promptId=16" class="portal-card magnetic link-card"><h3>Link 4</h3></a>
+                <a href="https://aiskillshouse.com/student/qr-mediator.html?uid=4222&promptId=16" class="portal-card magnetic link-card"><h3>Link 5</h3></a>
+                <!-- You can also change the text inside the <h3> tags to match your link descriptions -->
+            </div>
+        </section>
 
-        // Extra attempt to keep focus on this page (may be ignored by some browsers)
-        try {
-          window.focus();
-        } catch (e) { /* ignore */ }
+        <footer id="connect-section">
+            <h2 class="section-title">Connect With Me</h2>
+            <div class="social-links">
+                <a href="https://www.instagram.com/vthanishkaa?igsh=cnhhNTV6bm91bnN3" class="social-btn magnetic"><img src="https://img.icons8.com/ios-filled/50/000000/instagram-new.png" alt="Instagram" width="24" height="24"></a>
+                <a href="https://wa.me/qr/K47K4UY7EBX2D1" class="social-btn magnetic"><img src="https://img.icons8.com/ios-filled/50/000000/whatsapp.png" alt="WhatsApp" width="24" height="24"></a>
+                <a href="https://www.linkedin.com/in/v-thanishka-422b85318/" class="social-btn magnetic"><img src="https://img.icons8.com/ios-filled/50/000000/linkedin.png" alt="LinkedIn" width="24" height="24"></a>
+            </div>
+            <div id="outro-logo"></div>
+            <p class="footer-text">Your journey begins now.</p>
+        </footer>
+    </div>
 
-        return true;
-      } catch (err) {
-        document.body.removeChild(a);
-        return false;
-      }
-    }
+    <div id="game-modal" style="display: none;">
+        <canvas id="game-canvas"></canvas>
+        <div id="game-ui">
+            <div id="game-stats">
+                <div id="score">Score: 0</div>
+                <div id="stars">Stars: 0</div>
+            </div>
+            <div id="game-over-screen" style="display: none;">
+                <h1>Game Over</h1>
+                <p>Final Score: <span id="final-score">0</span></p>
+                <p>Stars Collected: <span id="final-stars">0</span></p>
+                <button id="restart-game-btn">Play Again</button>
+            </div>
+            <div id="touch-controls" style="display: none;">
+                <div id="left-control"></div>
+                <div id="right-control"></div>
+            </div>
+        </div>
+        <button id="close-game-btn" aria-label="Close game">&times;</button>
+    </div>
 
-    // Wire up buttons
-    document.getElementById('buttons').addEventListener('click', (ev) => {
-      const btn = ev.target.closest('button');
-      if (!btn) return;
+    <!-- optional audio (kept commented) -->
+    <!-- <audio id="hover-sound" src="assets/sounds/ui_hover.wav" preload="auto"></audio> -->
+    <!-- <audio id="click-sound" src="assets/sounds/ui_click.wav" preload="auto"></audio> -->
+    <!-- <audio id="success-sound" src="assets/sounds/game_success.wav" preload="auto"></audio> -->
+    <!-- <audio id="fail-sound" src="assets/sounds/game_fail.wav" preload="auto"></audio> -->
 
-      const url = btn.getAttribute('data-url');
-      if (!url) return;
-
-      const ok = openInBackground(url);
-      const msgEl = document.getElementById('msg');
-      if (!ok) {
-        msgEl.textContent = 'Popup blocked — please allow pop-ups for this site or try right-click → Open in new tab.';
-        // optional: show brief visual hint for users
-        setTimeout(() => { msgEl.textContent = ''; }, 8000);
-      } else {
-        msgEl.textContent = ''; // clear any previous message
-      }
-    });
-  </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

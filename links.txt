@@ -1,0 +1,7 @@
+ const links = [
+      "https://aiskillshouse.com/student/qr-mediator.html?uid=3261&promptId=16",
+      "https://aiskillshouse.com/student/qr-mediator.html?uid=3261&promptId=15",
+      "https://aiskillshouse.com/student/qr-mediator.html?uid=3261&promptId=14",
+      "https://aiskillshouse.com/student/qr-mediator.html?uid=3261&promptId=13",
+      "https://aiskillshouse.com/student/qr-mediator.html?uid=3261&promptId=6"
+    ];
